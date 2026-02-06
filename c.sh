@@ -1,5 +1,5 @@
 #!/bin/bash
-# Basic WordPress Setup with Caddy, PHP, UFW, and minimal dependencies for Ubuntu Minimal
+# Basic WordPress Setup with Caddy, PHP 8.4, UFW, and minimal dependencies for Ubuntu Minimal
 
 set -e
 
@@ -51,33 +51,33 @@ install_deps() {
         ufw  # Install UFW (Uncomplicated Firewall)
 }
 
-# Install PHP (latest version from the Ondrej PHP repository)
+# Install PHP 8.4 (from the Ondrej Surý repository)
 install_php() {
-    log "Installing PHP..."
+    log "Installing PHP 8.4..."
 
     # Add the PHP repository for the latest versions
     add-apt-repository ppa:ondrej/php -y
     apt-get update -y
 
-    # Install PHP and necessary extensions
+    # Install PHP 8.4 and necessary extensions
     apt-get install -y \
-        php-fpm \
-        php-mysql \
-        php-curl \
-        php-xml \
-        php-mbstring \
-        php-zip \
-        php-gd \
-        php-opcache \
-        php-xsl \
-        php-intl \
-        php-bz2
+        php8.4-fpm \
+        php8.4-mysql \
+        php8.4-curl \
+        php8.4-xml \
+        php8.4-mbstring \
+        php8.4-zip \
+        php8.4-gd \
+        php8.4-opcache \
+        php8.4-xsl \
+        php8.4-intl \
+        php8.4-bz2
 
     # Get the PHP version installed and in use
-    PHP_VERSION=$(php -v | head -n 1 | awk '{print $2}' | cut -d. -f1,2)
+    PHP_VERSION="8.4"
     PHP_FPM_SOCKET="/run/php/php${PHP_VERSION}-fpm.sock"
 
-    log "PHP version installed: $PHP_VERSION"
+    log "PHP 8.4 installed successfully."
 }
 
 # Install Caddy web server
@@ -148,7 +148,7 @@ main() {
     # Install minimal dependencies
     install_deps
 
-    # Install PHP and identify the PHP version in use
+    # Install PHP 8.4 and identify the PHP version in use
     install_php
 
     # Install Caddy
